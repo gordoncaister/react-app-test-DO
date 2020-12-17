@@ -26,10 +26,11 @@ import Select2 from "react-select2-wrapper";
 // plugin that creates slider
 import Slider from "nouislider";
 // react plugin that creates text editor
-import ReactQuill from "react-quill";
+import dynamic from "next/dynamic";
+// react plugin that creates text editor
+const ReactQuill = dynamic(() => import("react-quill"));
 // javascript plugin that creates nice dropzones for files
-import Dropzone from "dropzone";
-// reactstrap components
+const Dropzone = dynamic(() => import("dropzone"));
 import {
   Button,
   Card,
@@ -53,6 +54,13 @@ import Admin from "layouts/Admin.js";
 import SimpleHeader from "components/Headers/SimpleHeader.js";
 
 Dropzone.autoDiscover = false;
+
+if (typeof window === "undefined") {
+  global.window = {};
+}
+if (typeof document === "undefined") {
+  global.document = {};
+}
 
 class Components extends React.Component {
   state = {
