@@ -16,8 +16,9 @@
 */
 import React from "react";
 // javascript plugin that creates a sortable object from a dom object
-import List from "list.js";
-// reactstrap components
+import dynamic from "next/dynamic";
+// javascript plugin that creates a sortable object from a dom object
+const List = dynamic(() => import("list.js"));
 import {
   Badge,
   Card,
@@ -41,6 +42,13 @@ import {
 import Admin from "layouts/Admin.js";
 // core components
 import SimpleHeader from "components/Headers/SimpleHeader.js";
+
+if (typeof window === "undefined") {
+  global.window = {};
+}
+if (typeof document === "undefined") {
+  global.document = {};
+}
 
 class Sortable extends React.Component {
   componentDidMount() {
